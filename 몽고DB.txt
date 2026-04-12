@@ -1,0 +1,88 @@
+몽고디비수업
+mongod --dbpath "폴더" --port "포트" --logpath "파일" 
+(중요 폴더 먼저 있어야함, 로그패스는 파일은 없어도 만들어짐 )
+
+
+1. Ctrl + X를 누르면 CMD에서 실행한것을 취소시키는 명령어도 알려준다. 
+
+
+2. 몽고디비 Compass를 켠다. 
+-- 여기서 dbpath는 중요하지 않고 port만 맞추면 Connection이 연결된것을 확인할 수 있다. 
+- Compass로 연결과 종료를 해보면서 로그로 직접 확인을 해본다.
+
+admin,config,local DB가 있는데 여기는 건드는 영역이 아님 
+이미 프로그램에 필요한 DB그자체임
+
+- compass로 직접 DB에 데이터를 넣어보자. 
+나만의 DB를 만들어보자 "Santa"라고말이지
+
+- "Santa" 밑으로가서 AddData로 데이터를 추가해보자 ( JSon형식으로 넣게 되어있음 )
+
+- insertDocument를 누르면 직접 json형식으로 맞춰서 넣을수 있음 
+
+/** 
+* Paste one or more documents here
+*/
+{
+  "_id": {
+    "$oid": "69db30538d5a4ef50cf0e8e1"
+  },
+  "userID" : 10,
+  "money" : 6000,
+  "level" : 1
+}
+
+// C#에서 받을 클래스 
+[Serializable]
+public class SantaUser {
+    public string Id;
+    public int UserID;
+    public int Money;
+    public int Level;
+}
+[Serializable]
+public class ClassEventPayload {
+    public long Date;
+    public SantaUser User;
+    public string ErrorMessage;
+}
+
+이렇게하고 보자
+
+연결을 끊어보고 저장이 되었는지 확인해보자
+
+삭제도해보고, 쿼리도 할수있으면 해보자
+
+몽고DB구조 ===
+
+1. DB ( 드라이브개념)
+2. Collection ( 폴더개념 )
+3. Document (각 저장 객체들, 파일 클래스 개념 )
+
+--> 이제 Node서버가서 
+
+npm install mongoose로 몽고디비를 사용할 수 있는 플러그인을 설치하자 
+
+몽고DB익스포트할 파일에
+const dburl = "mongodb://localhost:4885/StudyDB"; // 디비접근
+StudyDB는 내가 만드는 DB이름임 
+
+socket에서 emit에서 그냥 보내면 됨 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

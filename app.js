@@ -4,6 +4,26 @@ console.log("hello world");
 
 const http = require('http');
 const socket = require('socket.io');
+const santadb = require('./TestDB/santadb');
+
+console.log(santadb.getTestnumber());
+
+(async () => {
+  await santadb.init();
+  console.log('DB connected');
+
+  const user = await santadb.findByUserID(10);
+  console.log(user);
+
+  const users = await santadb.findAll();
+  console.log(users);
+
+  const csharpUser = santadb.toCSharpSantaUser(user);
+  console.log(csharpUser);
+
+})();
+
+// DB는 서버와 별도 터미널에서 확인: npm run db:check  (또는 node TestDB/check-user.js)
 
 // http 서버 코드
 /*const server = http.createServer((req, res) => {
@@ -22,7 +42,7 @@ server.listen(PORT, () => {
 
 function testfunction() {
   console.log('서버 동작 중');
-}*/
+}
 
 const server = http.createServer();
 const port = 11100;
@@ -64,7 +84,9 @@ socket.on('class', (data) => {
 });
 
 
+
+
 server.listen(port, () => {
 console.log('listening on *:' + port);
-});
+});*/
 
